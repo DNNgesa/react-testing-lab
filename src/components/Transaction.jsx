@@ -1,12 +1,24 @@
 import React from "react";
 
-function Transaction({transaction}) {
+function Transaction({ transaction }) {
+  const isPositive = Number(transaction.amount) >= 0;
+
   return (
     <tr>
-      <td>{transaction.date}</td>
-      <td>{transaction.description}</td>
-      <td>{transaction.category}</td>
-      <td>{transaction.amount}</td>
+      <td className="text-muted small">{transaction.date}</td>
+      <td className="fw-semibold">{transaction.description}</td>
+      <td>
+        <span className="badge bg-secondary-subtle text-dark">
+          {transaction.category}
+        </span>
+      </td>
+      <td
+        className={`text-end fw-bold ${
+          isPositive ? "text-success" : "text-danger"
+        }`}
+      >
+        {transaction.amount}
+      </td>
     </tr>
   );
 }
